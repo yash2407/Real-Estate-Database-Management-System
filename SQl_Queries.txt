@@ -1,0 +1,65 @@
+﻿Final queries:
+
+
+1. Get the name, email, contact no of the customers who has bought/rented/leased a property in Gandhinagar city.
+
+
+Sol.           select "Name",email,contact_no,property_id,propertyname from logindetails as login join (select * from property as prop join (select cust.* from customerdetails as cust join bookingdetails as book on cust.verification_id=book.buyer_id) as cust2 on cust2.verification_Id=prop.owner_id where prop.city='Gandhinagar' and prop.bookingstatus='Sold') as prop1 on prop1.verification_Id=login.verification_Id;
+
+
+select cd."Name", cd.email, l.contact_no, pr.property_id, pr.propertyname from logindetails as l natural join customerdetails as cd join bookingdetails as b natural join property as pr on (cd.verification_id=b.buyer_id and pr.city = 'Gandhinagar');
+
+
+1. Vikram is moving to delhi for 6 months and want a flat on rent. Get the details of flats on rent in Delhi having contract length more than 6 months.
+
+
+Sol.        select property_id,contract_period,city,sales_type from property natural join propertytype where contract_period>'6' and (LOWER(sales_type)=LOWER('for rent') or LOWER(sales_type)=LOWER('for lease')) and city='Jamnagar' and "Type"='Flat';
+
+
+
+
+1. Details of the properties having more than 3 rating in feedback given by minimum 2 buyer in Rajkot.
+
+
+Sol.        select * from (select property_id, propertyname, count(rating) as cnt from property natural join feedback where feedback.rating>3 group by property_id, propertyname) as rate  where cnt>=2 order by cnt;
+
+
+1. Suggestion for a buyer having verification ID=1007: Flats available in your city
+
+
+Sol.        select * from (select prop.* from customerdetails as cust join property as prop on cust.city=prop.city where cust.verification_id='1007' and prop.bookingstatus='Available') as customer natural join propertytype as pt where pt."Type"='Flat' and pt.subtype='Residential';
+
+
+1. Property whose construction will be completed in more than 1 year.
+
+
+Sol.        select * from property where (constructionstatus='1 year' or constructionstatus='2 year' or constructionstatus='2 year+') and bookingstatus='Available';
+
+
+      6.        Retrieve the property-id,property name of the deals made in Jamnagar city after 2016.
+
+
+Sol.         select property_id, propertyname from property as prop natural join bookingdetails as b where prop.city='Jamnagar' and prop.bookingstatus='Sold' and (select date_part('year',b.date_of_booking))>'2016';
+      
+      7.   Retrieve the average ratings given on properties per seller for all the sellers.
+
+
+Sol.     select verification_id, "Name", avg(rating) from customerdetails as cd join property as pr natural join feedback as fb on (verification_id = owner_id) group by verification_id;
+
+
+      8.        Retrieve the average carpet area for all the areas of all the cities.
+
+
+Sol.        select city,area,avg(carpet_area) from property natural join propertytype where property.bookingstatus='Available' group by area,city order by city;
+
+
+      9. Retrieve verification_id, sum of money he/she spent in buying properties, his/her budget and difference between sum of money spent and budget.
+
+
+Sol.        select verification_id, sum(selling_price), budget, (budget - sum(selling_price)) as difference from bookingdetails as fb join customerdetails as cd on (cd.verification_id=fb.buyer_id) group by verification_id;
+
+
+     10.    Retrieve seller_id, number of properties of his/her competitors and average price of his/her competitors’ properties of all the sellers in his/her area.
+
+
+Sol.         select pr.owner_id, count(distinct pp.owner_id), avg(amount) from property as pr join property as pp natural join propertytype on (pr.owner_id!=pp.owner_id and pr.city=pp.city) group by pr.owner_id;

@@ -1,0 +1,216 @@
+﻿INSERT INTO "customerdetails" VALUES
+        (2001,'Yash Mehta','yash@gmail.com',19,'Male','Rameshwarnagar','Jamnagar','Both',3000000),
+        (2002,'Milan Gandhi','milan@gmail.com',20,'Male','Patel Colony','Jamnagar','Seller',2500000),
+        (2003,'Malhar Chauhan','malhar@gmail.com',20,'Male','Valkeshwari','Jamnagar','Buyer',NULL),
+        (2004,'Kinjal Patel','kinjal@gmail.com',20,'Female','Rameshwarnagar','Jamnagar','Both',1000000),
+        (2005,'Jaydeep Raval','jaydeep@gmail.com',22,'Male','Patel Colony','Jamnagar','Both',2700000),
+        (2006,'Ketan Raval','ketan@gmail.com',49,'Male','Kalyan Nagar','Junagadh','Buyer',NULL),
+        (2007,'Mital Mehta','Mital@gmail.com',39,'Female','Moti Baug','Junagadh','Seller',5500000),
+        (2008,'Bhupendra Mehta','bhupendra@gmail.com',52,'Male','Rameshwarnagar','Jamnagar','Buyer','NULL),
+        (2009,'Alka Mehta','alka@gmail.com',48,'Female','Kalyan Nagar','Junagadh','Both',5000000),
+        (2010,'Dhara Mehta','dhara@gmail.com',25,'Female','Valkeshwari','Jamnagar','Both',4000000);  
+INSERT INTO customerdetails VALUES (1001, 'Anil Patel', 'anilpatel12@gmail.com', 25, 'M', 'Narshan Tekri', 'Porbandar', 'Both', 2000000);
+INSERT INTO customerdetails VALUES (1002, 'Akshay Agarwal', 'akshay7812@gmail.com', 35, 'M', 'GIDC', 'Rajkot', 'Seller', NULL);
+INSERT INTO customerdetails VALUES (1003, 'Bhavesh Acharya', 'acharyabhavesh@yahoo.com', 46, 'M', 'Vastrapur', 'Ahmedabad', 'Seller', NULL);
+INSERT INTO customerdetails VALUES (1004, 'Harshit Ramoliya', 'harshitramoliya@gmail.com', 23, 'M', 'Paldi', 'Ahmedabad', 'Buyer', 4500000);
+INSERT INTO customerdetails VALUES (1005, 'Feni Khatri', 'fenilkhatri59@gmail.com', 38, 'F', 'Infocity', 'Gandhinagar', 'Both', 5000000);
+INSERT INTO customerdetails VALUES (1006, 'Sai Reddy', 'reddysai25@gmail.com', 31, 'M', 'Metoda', 'Rajkot', 'Seller', NULL);
+INSERT INTO customerdetails VALUES (1007, 'Zeel Patel', 'zeelpatel12@gmail.com', 25, 'F', 'GIDC', 'Rajkot', 'Buyer', 10000000);
+INSERT INTO customerdetails VALUES (1008, 'Rajvi Gupta', 'rajvig786@gmail.com', 28, 'F', 'Infocity', 'Gandhinagar', 'Buyer', 8000000);
+INSERT INTO customerdetails VALUES (1009, 'Raj Jadeja', 'rajjadeja75@gmail.com', 41, 'M', 'Jubeli', 'Junagadh', 'Seller', NULL);
+INSERT INTO customerdetails VALUES (1010, 'Denish Verma', 'denishverma@hotmail.com', 37, 'M', 'Pimpri', 'Pune', 'Seller', NULL);
+INSERT INTO customerdetails VALUES ('4001','Hardik Chhatrala','hardik@gmail.com','20','M','Haweli society','Junagadh','Seller',NULL);
+INSERT INTO customerdetails VALUES ('4002','Uday Patel','umesh2210@gmail.com','24','M','Naroda','Ahmedabad','Buyer','3500000');
+INSERT INTO customerdetails VALUES ('4003','Minal Sherathiya','minalsherathiya23@gmail.com','22','Mavadi','Rajkot','Seller',NULL);
+INSERT INTO customerdetails VALUES ('4004', 'Darshit Hansaliya', 'darshit_hansaliya@gmail.com', '21', 'M', 'Rajvihar', 'Chitravad', 'Buyer', '4200000');
+INSERT INTO customerdetails VALUES ('4005', 'Krunal Raddy', 'Krunal_221@gmail.com', '48', 'M', 'Ambavadi', 'Ahmedabad', 'Seller', NULL);
+INSERT INTO customerdetails VALUES ('4006', 'Denisha' , 'denisha@gmail.com', '23', 'F', 'Iskon' , 'Ahmedabad', 'Buyer', '15000000');
+INSERT INTO customerdetails VALUES ('4007', 'Zeel vaishanav', 'zeelvaishanav@gmail.com', '20', 'M', 'Shastrinagar', 'Rajkot', 'Seller', NULL);
+INSERT INTO customerdetails VALUES (4008, 'Hinal Paramar', 'hinalppap@gmail.com', '67', 'F', 'Laldarvaja' , 'Dhoraji', 'Buyer', 500000);
+INSERT INTO customerdetails VALUES (4009, 'Dixit Mardiya', 'dixitmd@gmail.com', 35, 'M', 'Uparkot' , 'Junagadh', 'Seller', NULL);
+INSERT INTO customerdetails VALUES (4010, 'Chintan', 'kothadiyachintan@yahoo.com', 55, 'M', 'Rajdhat' , 'Delhi', 'Both', 90000000);
+    
+INSERT INTO "logindetails" VALUES
+        (2101,2001,'yash',9123456780),
+        (2102,2002,'milan',8123456790),
+        (2103,2003,'malhar',7123456890),
+        (2104,2004,'kinjal',6123457890),
+        (2105,2005,'jaydeep',9123456789),
+        (2106,2006,'ketan',8123456789),
+        (2107,2007,'mital',7123456789),
+        (2108,2008,'bhupendra',6123456789),
+        (2109,2009,'alka',8987654321),
+        (2110,2010,'dhara',9987654321);
+INSERT INTO logindetails VALUES ('1301', 1001, 'anilapatel12', '9834617236');
+INSERT INTO logindetails VALUES ('1302', 1002, 'akshay9512', '8972517236');
+INSERT INTO logindetails VALUES ('1303', 1003, 'acharyabhavesh', '8866017236');
+INSERT INTO logindetails VALUES ('1304', 1004, '12345678', '9884265496');
+INSERT INTO logindetails VALUES ('1305', 1005, 'qwertyuiop', '8457127236');
+INSERT INTO logindetails VALUES ('1306', 1006, 'reddy@sai876', '7748152659');
+INSERT INTO logindetails VALUES ('1307', 1007, 'zeel.patel', '9955417236');
+INSERT INTO logindetails VALUES ('1308', 1008, 'qwerty123456', '9461872635');
+INSERT INTO logindetails VALUES ('1309', 1009, 'bhainarolla', '9991627535');
+INSERT INTO logindetails VALUES ('1310', 1010, 'denish@verma84', '8824007491');
+INSERT INTO logindetails VALUES (4401, 4001, 'hardik@happy', 9913699788);
+INSERT INTO logindetails VALUES (4402, 4002, 'rudrainfotech', 9574511183);
+INSERT INTO logindetails VALUES (4403, 4003, 'mianlarchaisis', 9725389345);
+INSERT INTO logindetails VALUES (4404, 4004, 'ganpatibapa', 9246832783);
+INSERT INTO logindetails VALUES (4405, 4005, 'dinnerwinner', 6534562965);
+INSERT INTO logindetails VALUES (4406,4006, 'dolly#denisha', 7878586828);
+INSERT INTO logindetails VALUES (4407, 4007, 'zeel.vaishanav', 9958767236);
+INSERT INTO logindetails VALUES (4408, 4008, 'paramar@hinal', 8967429012);
+INSERT INTO logindetails VALUES (4409, 4009, 'boosfan' , 7043572522);
+INSERT INTO logindetails VALUES (4410, 4010, 'cvkothadiya', 7823435281);
+    
+INSERT INTO "property" VALUES
+        (2201,'Shivam','Jamnagar',2001,'1 year','Available'),
+        (2202,'Sahiyar','Jamnagar',2002,'2 year','Sold'),
+        (2204,'Ram','Jamnagar',2004,'Ready to move','Sold'),
+        (2205,'Mannat','Jamnagar',2005,'2 year+','Available'),
+        (2207,'Avkash','Junagadh',2007,'1 year','Sold'),
+        (2209,'Motipalace','Junagadh',2009,'Ready to move','Available'),
+        (2210,'Safal','Jamnagar',2010,'2 year+','Sold');
+INSERT INTO property VALUES (1201, 'Shivam', 'Rajkot', 1002, 'Ready to move', 'Available');
+INSERT INTO property VALUES (1202, 'Sneh', 'Ahmedabad', 1003, '2 years+', 'Available');
+INSERT INTO property VALUES (1203, 'Jannat', 'Porbandar', 1001, 'Ready to move', 'Sold');
+INSERT INTO property VALUES (1204, 'Param', 'Gandhinagar', 1005, 'Ready to move', 'Available');
+INSERT INTO property VALUES (1205, 'Parmeshvar', 'Rajkot', 1006, 'Ready to move', 'Available');
+INSERT INTO property VALUES (1206, 'Acharya Office', 'Ahmedabad', 1003, 'Ready to move', 'Available');
+INSERT INTO property VALUES (1207, 'Jadeja Bunglow', 'Junagadh', 1009, 'Ready to move', 'Available');
+INSERT INTO property VALUES (1208, 'Silver House', 'Gandhinagar', 1005, '1 year', 'Sold');
+INSERT INTO property VALUES (1209, 'Krupa', 'Porbandar', 1001, '2 years', 'Available');
+INSERT INTO property VALUES (1210, 'Platinum Apartment', 'Pune', 1010, 'Ready to move', 'Available');
+INSERT INTO property VALUES (4101, 'Radhe', 'Rajkot', 4009, '2 years+', 'Sold');
+INSERT INTO property VALUES (4102,'varambag','Agatrai',4001,'ready to move','Available');
+INSERT INTO property VALUES (4103,'Shrijee' , 'Junagadh',4009,'1 year','Sold');
+INSERT INTO property VALUES (4104,'Raj Farm','Somanath',4003,'2 years+','Available');
+INSERT INTO property VALUES (4105,'Aradhya','Mumbai',4005,'ready to move','Sold');
+INSERT INTO property VALUES (4106,'Atlantis','Delhi',4010,'2 years+','Available');
+INSERT INTO property VALUES (4107,'Gurukul plot','Ahmedabad',4007,'ready to move','sold');
+INSERT INTO property VALUES (4108,'Shukan','Ahmedabad',4005,'1 year','Available');
+INSERT INTO property VALUES (4109,'Vrundavan','Jamnagar',4009,'rady to move','Sold');
+INSERT INTO property VALUES (4110,'Shivam','Rajkot',4003,'2 years','Available');
+   
+INSERT INTO "propertytype" VALUES
+        (2201,'Plot','for sale',1000000,NULL,NULL,1500,NULL,NULL),
+        (2202,'Farmhouse','for sale',50000000,NULL,8,5000,NULL,'Residential'),
+        (2204,'Flat','for lease',2500000,'11 months',3,2200,3,'Residential'),
+        (2205,'Flat','for rent',6000000,'24 months',4,2500,4,'Commercial'),
+        (2207,'Bunglow','for lease',8000000,'10 months',6,4400,2,'Residential'),
+        (2209,'Flat','for sale',2000000,NULL,2,1800,5,'Residential'),
+        (2210,'Plot','for sale',3000000,NULL,NULL,6000,NULL,NULL);
+INSERT INTO propertytype VALUES (1201, 'Plot', 'For sale', 3000000, NULL, 2, 550, NULL, 'Residential');
+INSERT INTO propertytype VALUES (1202, 'Bunglow', 'For sale', 4500000, NULL, 3, 650, NULL, 'Residential');
+INSERT INTO propertytype VALUES (1203, 'Plot', 'For sale', 5000000, NULL, 3, 750, NULL, 'Residential');
+INSERT INTO propertytype VALUES (1204, 'Flat', 'For rent', 2500000, '12 months', 1, 450, 2, 'Residential');
+INSERT INTO propertytype VALUES (1205, 'Plot', 'For lease', 3500000, '60 months', 2, 500, NULL, 'Residential');
+INSERT INTO propertytype VALUES (1206, 'Office', 'For sale', 6000000, NULL, NULL, 350, NULL, 'Commercial');
+INSERT INTO propertytype VALUES (1207, 'Bunglow', 'For sale', 5300000, NULL, 2, 600, NULL, 'Residential');
+INSERT INTO propertytype VALUES (1208, 'Plot', 'For sale', 4000000, NULL, 2, 450, NULL, 'Residential');
+INSERT INTO propertytype VALUES (1209, 'Flat', 'For rent', 4800000, '12 months', 3, 600, 1, 'Residential');
+INSERT INTO propertytype VALUES (1210, 'Flat', 'For rent', 3700000, '12 months', 2, 400, 1, 'Residential');
+INSERT INTO propertytype VALUES (4101, 'Bunglow', 'For sale', 5000000, NULL, 2,750, 0, 'Residential');
+INSERT INTO propertytype VALUES (4102,'Flate','For sale',4500000,NULL,1,250,4,'Residential');
+INSERT INTO propertytype VALUES (4103,'Duplex','For reent',15000,'11 months',4,400,5,'Residential');
+INSERT INTO propertytype VALUES (4104,'Farm','For lease',210000,'24 months',NULL,34000,0,'Commercial');
+INSERT INTO propertytype VALUES (4105,'Bunglow','For sale',10000000,NULL,5,2300,0,'Residential');
+INSERT INTO propertytype VALUES (4106,'Flate','For rent',10000,'6 months',3,600,4,'Residential');
+INSERT INTO propertytype VALUES (4107,'Plot','For sale',1300000,NULL,NULL,1000,0,'Commercial');
+INSERT INTO propertytype VALUES (4108,'Bunglow','For rent',5500,'24 months',4,250,0,'Residential');
+INSERT INTO propertytype VALUES (4109,'Farm','For sale',2500000,NULL,NULL,35000,0,Commercial);
+INSERT INTO propertytype VALUES (4110,'Flate','For rent',7000,'15 months',2,350,1,'Residential');
+INSERT INTO property VALUES ('3509', 'Weekend Vibes', 'Mumbai', '3001', 'ready to move', 'Sold');
+INSERT INTO propertytype VALUES ('3509', 'Farmhouse', 'for sale', '25000000', NULL, '4', '3000', NULL, 'Residential');
+INSERT INTO property VALUES ('3510', 'Om', 'Chandigarh', '3004', '1 year', 'Available');
+INSERT INTO propertytype VALUES ('3510', 'Bungalow', 'for sale', '20000000', NULL, '5', '2100', NULL, 'Residential');
+INSERT INTO property VALUES ('3511', 'Fursat', 'Kolkata', '3007', 'Ready to move', 'Available');
+INSERT INTO propertytype VALUES ('3511', 'Farmhouse', 'for sale', '15000000', NULL, '3', '1800', NULL, 'Residential');
+
+
+
+
+INSERT INTO "bookingdetails" VALUES
+        (2302,2202,2006,2002,'2018-07-24',50000000),
+        (2304,2204,2008,2004,'2016-06-25',2500000),
+        (2307,2207,2009,2007,'2016-05-05',8000000),
+        (2310,2210,2005,2010,'2017-09-23',3000000);
+INSERT INTO bookingdetails VALUES (1701, 1203, 1001, 1007, '2016-10-01', 4700000);
+INSERT INTO bookingdetails VALUES (1702, 1208, 1005, 1004, '2017-11-02', 3800000);
+INSERT INTO bookingdetails VALUES ('4201', '4102', 4002, 4001,1998-10-15, 6300000);
+INSERT INTO bookingdetails VALUES (4202,4103,4010,4009,2005-02-13,1000000);
+INSERT INTO bookingdetail VALUES (4203,4104,4008,4003,2016-04-22,2200000);
+INSERT INTO bookingdetails VALUES ('3301', '3502', '3003', '3004', '2017-05-25', '4500000');
+INSERT INTO bookingdetails VALUES ('3302', '3509', '3006', '3001', '2018-09-10', '24000000');
+INSERT INTO bookingdetails VALUES ('3303', '3507', '3008', '3009', '2018-04-17', '15000');
+INSERT INTO bookingdetails VALUES ('3304', '3501', '3007', '3002', '2017-12-31', '19000');
+INSERT INTO bookingdetails VALUES ('3305', '3510', '3010', '3004', '2018-08-20', '15000000');
+INSERT INTO bookingdetails VALUES ('3306', '3504', '3001', '3005', '2018-11-13', '9000000');
+
+
+
+
+INSERT INTO "feedback" VALUES
+        (2402,2002,2202,4,'Great Deal'),
+        (2404,2004,2204,3,'Average Deal'),
+        (2405,2005,2210,5,NULL),
+        (2406,2006,2202,4,'Awesome'),
+        (2407,2007,2207,5,NULL);
+INSERT INTO feedback VALUES (1501, 1001, 1204, 5, 'I would like to move to this property today.');
+INSERT INTO feedback VALUES (1502, 1006, 1209, 2, 'I don't think this property will be good investment.');
+INSERT INTO feedback VALUES (1503, 1008, 1210, 5, NULL);
+INSERT INTO feedback VALUES (1504, 1004, 1204, 4, 'Nice rooms');
+INSERT INTO feedback VALUES (1505, 1002, 1205, 1, 'Don't buy this property');
+INSERT INTO feedback VALUES (1506, 1009, 1204, 5, 'Best property of the town');
+INSERT INTO feedback VALUES (1507, 1007, 1201, 2, 'Not so good');
+INSERT INTO feedback VALUES (1508, 1008, 1202, 3, 'No comments');
+INSERT INTO feedback VALUES (1509, 1004, 1210, 1, 'Worst rooms ever');
+INSERT INTO feedback VALUES (1510, 1001, 1206, 4, 'Great place for business');
+INSERT INTO feedback VALUES (4523, 4001, 4101, 3, 'More expection from rajkot property site');
+INSERT INTO feedback VALUES (4524 ,4001,4101, 4 , 'furniture is good');
+INSERT INTO feedback VALUES (4525,4003,4102,4,NULL);
+INSERT INTO feedback VALUES (4526,4003,4105,4,'good location');
+INSERT INTO feedback VALUES (4527,4003,4101,2,'surrounding is not good');
+INSERT INTO feedback VALUES (4528,4002,4110,5,'Price worthy');
+INSERT INTO feedback VALUES (4529,4007,4103,5,NULL);
+INSERT INTO feedback VALUES (4530,4004,4108,4,'prime location');
+INSERT INTO feedback VALUES (4531,4004,4101,2,'worthless for investment');
+INSERT INTO feedback VALUES (4532,4006,4103,5,'I love large space of house');
+INSERT INTO feedback VALUES (4533,4005,4105,4,'Design is good but colour is dull');
+
+
+﻿INSERT INTO customerdetails  VALUES ('3001', 'Akshat Kaneria', 'abc12@gmail.com', '20', 'Male', 'Royal Park', 'Rajkot', 'Both', '20000000');
+INSERT INTO LoginDetails VALUES ('3101', '3001', 'abc12345', '9825476700');
+INSERT INTO customerdetails VALUES ('3002','Anurag Roy', 'xyz123@gmail.com', '26', 'Male' , 'shivaji marg', 'Mumbai', 'Seller', NULL);
+INSERT INTO LoginDetails VALUES ('3102', '3002', 'xyz123456', '9033732600');
+INSERT INTO customerdetails VALUES ('3003', 'Avani Singh', 'avani87@yahoo.in', '30', 'Female', 'vastrapur', 'Ahmedabad', 'Buyer', '5000000');
+INSERT INTO LoginDetails VALUES ('3103', '3003', 'avanisingh123', '9426078598');
+INSERT INTO customerdetails VALUES ('3004', 'Vikram Thakar', 'vikramabc@gmail.com', '40', 'Male', 'ramnagar society', 'Vadodara', 'Both', '10000000');
+INSERT INTO LoginDetails VALUES ('3104', '3004', '12345678', '8320056698');
+INSERT INTO customerdetails VALUES ('3005', 'Rushabh patel', 'abcxyz@gmail.com', '35', 'Male', 'Kalawad road', 'Pune', 'Both', '4000000');
+INSERT INTO LoginDetails VALUES ('3105', '3005', '12348765', '8320029096');
+INSERT INTO customerdetails VALUES ('3006', 'Prakrut Chauhan', 'pc@gmail.com', '20', 'Male', 'Kalawad road', 'Rajkot', 'Buyer','35000000');
+INSERT INTO customerdetails VALUES ('3007', 'Divyang Modi', 'dm@gmail.com', '25', 'Male', 'Race course', 'Gandhinagar', 'Both', '10000000');
+INSERT INTO customerdetails VALUES ('3008', 'Nirav Patel', 'nirav@yahoo.in', '32', 'Male', 'Kalyan nagar', 'Junagadh', 'Buyer', '3000000');
+INSERT INTO customerdetails VALUES ('3009', 'Himani Chaudhary', 'himu@gmail.com', '22', 'Female', 'M G road', 'Gurgaon', 'Seller', NULL);
+INSERT INTO customerdetails VALUES ('3010', 'Anamika singh', 'anamika@yahoo.in', '50', 'Female', 'M G road', 'Chennai', 'Buyer', '7500000');
+INSERT INTO LoginDetails VALUES ('3106', '3006', '126fghjk', '8612365400');
+INSERT INTO LoginDetails VALUES ('3107', '3007', '741ghjk', '8987365400');
+INSERT INTO LoginDetails VALUES ('3108', '3008', 'jkl123654', '9785296312');
+INSERT INTO LoginDetails VALUES ('3109', '3009', '126asdg', '9895175300');
+INSERT INTO LoginDetails VALUES ('3110', '3010', 'asd456','7654321890');
+INSERT INTO property VALUES ('3501', 'Provident Sunworth', 'Banglore', '3002', '1 year', 'Available');
+INSERT INTO propertytype VALUES ('3501', 'Flat', 'for rent', '20000', '2 months', '3', '1500', '5', 'Residential');
+INSERT INTO property VALUES ('3502', 'Axis Antara', 'Pune', '3004', 'ready to move', 'Sold');
+INSERT INTO propertytype VALUES ('3502', 'Flat', 'for sale', '5000000', NULL, '2', '1000', '9', 'Residential');
+INSERT INTO property VALUES ('3503', 'Alfa city', 'Rajkot', '3005', '2 years', 'Available');
+INSERT INTO propertytype VALUES ('3503', 'Office', 'for lease', '20000000', '24 months', NULL, '2000', NULL, 'Commercial');
+INSERT INTO property VALUES ('3504', 'Apple Altura', 'Rajkot', '3005', 'ready to move', 'Available');
+INSERT INTO propertytype VALUES ('3504', 'Flat', 'for sale', '9000000', NULL, '4', '2500', '2', 'Residential');
+INSERT INTO property VALUES ('3505', 'Satyam', 'Rajkot', '3002', 'ready to move', 'Available');
+INSERT INTO propertytype VALUES ('3505', 'Bungalow', 'for sale', '4000000', NULL, '2', '1500', NULL, 'Residential');
+INSERT INTO property VALUES ('3506', 'Sarvam', 'Gandhinagar', '3007', '2 years', 'Available');
+INSERT INTO propertytype VALUES ('3506', 'Bungalow', 'for rent', '240000', '12 months', '3', '1000', NULL, 'Residential');
+INSERT INTO property VALUES ('3507', 'Dwarika Heights', 'Gurgaon', '3009', 'ready to move', 'Available');
+INSERT INTO propertytype VALUES ('3507', 'Flat', 'for rent', '15000', '3 months', '1', '700', '6', 'Residential');
+INSERT INTO property VALUES ('3508', 'Pacific Heights', 'Mysore', '3009', '2 years+', 'Available');
+INSERT INTO propertytype VALUES ('3508', 'Flat', 'for rent', '90000', '6 months', '3', '1900', '8', 'Residential');

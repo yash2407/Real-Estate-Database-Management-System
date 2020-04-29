@@ -1,0 +1,269 @@
+﻿Stored_Procedures:
+
+
+1. set search_path to realestate1;
+CREATE or REPLACE FUNCTION price_per_sq_ft(IN loc varchar(255),IN ar varchar(50),IN st varchar(20),OUT ppsf real,OUT ol varchar(255),OUT oa varchar(50),OUT ost varchar(20)) RETURNS record AS $BODY$
+DECLARE
+        r record;
+   ans real;
+   tot integer;
+BEGIN
+        ans:=0.0;
+   tot:=0;
+   FOR r IN SELECT * FROM property as pr NATURAL JOIN propertytype as pt WHERE LOWER(city)=LOWER(loc) AND LOWER(area) = LOWER(ar) AND LOWER(sales_type)=LOWER(st) LOOP 
+                ans := ans + r.amount / r.carpet_area;
+       tot := tot + 1;
+        END LOOP;
+   ppsf := 0;
+   if tot !=0 then
+            ppsf := ans/tot;
+   end if;
+   ol := loc;
+   oa := ar;
+   ost := st;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+
+
+
+   1. set search_path to realestate1;
+CREATE or REPLACE FUNCTION no_of_buyer(IN cid varchar(16),OUT ocid varchar(16),OUT gt real,OUT tot integer,OUT pt real) RETURNS record AS $BODY$
+DECLARE
+        r record;
+   ans real;
+   avga real;
+BEGIN
+        ans:=0.0;
+   tot:=0;
+   FOR r IN SELECT * FROM property natural join propertytype where owner_id=cid LOOP 
+        ans := ans + r.amount;
+        tot := tot + 1;
+        END LOOP;
+   avga := 0;
+   if tot !=0 then
+            avga := ans/tot;
+   end if;
+   tot := 0;
+   gt := 0;
+   FOR r IN select * from customerdetails LOOP
+        if r.type_of_customer != LOWER('Seller') then
+                    if r.budget >= avga then
+                       gt :=gt + 1;
+               end if;
+        end if;
+       tot := tot + 1;
+   END LOOP;
+   pt := gt/tot;
+   pt := pt*100;
+   ocid := cid;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+
+
+
+      1. set search_path to realestate1;
+CREATE or REPLACE FUNCTION age_group(IN cid varchar(16),OUT ocid varchar(16),OUT lt integer,OUT gt integer) RETURNS record AS $BODY$
+DECLARE
+        r record;
+           z record;
+        ans real;
+        avga real;
+        mx integer;
+        mn integer;
+        age1 integer;
+        age2 integer;
+        c1 integer;
+        c2 integer;
+        tot integer;
+BEGIN
+        ans:=0.0;
+        tot:=0;
+        FOR r IN SELECT * FROM property natural join propertytype where owner_id=cid LOOP 
+                mn := 0;
+                mx := 1000000000;
+               FOR z IN select * from customerdetails LOOP
+                        if z.type_of_customer != LOWER('Seller') then
+                                    if z.budget >= r.amount then
+                                        if z.budget < mx then
+                                       mx := z.budget;                                        
+                                        end if;
+                               end if;
+                                if z.budget < r.amount then
+                                        if z.budget > mn then
+                                       mn := z.budget;                                                                        
+                                        end if;
+                               end if;
+                        end if;
+                END LOOP;
+                c1 := 0;
+                c2 := 0;
+                age1 := 0;
+                age2 := 0;
+                FOR z IN select * from customerdetails LOOP
+                        if z.budget = mx then
+                                age1 := age1 + z.age;
+                                tot := tot + 1;
+                        end if;
+                        if mn!=mx then
+                                if z.budget = mn then
+                                        age2 := age2 + z.age;
+                                        tot := tot + 1;
+                                end if;
+                        end if;
+                END LOOP;
+                ans := ans + age1 + age2;
+        END LOOP;
+   avga := 0;
+   if tot !=0 then
+            avga := ans/tot;
+   end if;
+   
+   
+        if avga >= 15 and avga < 25 then
+                lt := 15;
+                gt := 25;
+        end if;
+        if avga >= 25 and avga < 35 then
+                lt := 25;
+                gt := 35;
+        end if;
+        if avga >= 35 and avga < 45 then
+                lt := 35;
+                gt := 45;
+        end if;
+        if avga >= 45 and avga < 55 then
+                lt := 45;
+                gt := 55;
+        end if;
+        if avga >= 55 and avga < 65 then
+                lt := 55;
+                gt := 65;
+        end if;        
+   
+   ocid := cid;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+
+
+
+         1. set search_path to realestate1;
+CREATE or REPLACE FUNCTION range_of_buying(IN vid varchar(16),IN cty varchar(255),OUT mn integer,OUT mx integer) RETURNS record AS $BODY$
+DECLARE
+        r record;
+        mini integer;
+   maxi integer;
+BEGIN
+        mini := 1000000000;
+   maxi := 0;
+        for r in select * from property natural join propertytype where city=cty loop
+           if r.amount > maxi then
+               maxi := r.amount;
+       end if;
+       if r.amount < mini then
+               mini := r.amount;
+       end if;
+   end loop;
+   mn := 0;
+   mx := 0;
+   for r in select * from customerdetails where verification_id = vid loop
+                if r.type_of_customer != LOWER('Seller') then
+                        mn := mini - r.budget;
+                   mx := maxi - r.budget;
+           end if;
+   end loop;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+
+
+
+
+
+Triggers:
+
+
+            1. set search_path to realestate1;
+CREATE OR REPLACE FUNCTION process_check_availability() RETURNS TRIGGER AS $trigger_on_booking$
+        DECLARE
+                pid property;
+                pid1 propertytype;
+        BEGIN
+            for pid IN SELECT * FROM property loop
+                IF(pid.property_id = new.property_id) THEN
+                    IF(pid.bookingstatus = 'Available') THEN
+                      UPDATE property SET bookingstatus='Sold' where property_id=new.property_id;
+                    END IF;
+                END IF;
+            END loop;
+                for pid1 IN SELECT * FROM propertytype loop
+                        IF(pid1.property_id=new.property_id and LOWER(pid1.sales_type)=LOWER('for sale')) THEN
+                                UPDATE property SET owner_id=new.buyer_id where property_id=new.property_id;
+                        END IF;                                                                                                                                                                 
+                --select pid
+                end loop;
+                RETURN NEW;
+        END;
+$trigger_on_booking$ LANGUAGE plpgsql
+
+
+CREATE TRIGGER trigger_on_booking AFTER INSERT ON bookingdetails
+FOR EACH ROW EXECUTE PROCEDURE process_check_availability();
+
+
+2.  
+
+
+CREATE VIEW booking AS
+SELECT * FROM bookingdetails;
+
+
+
+
+CREATE OR REPLACE FUNCTION my_trigger_function() RETURNS TRIGGER AS $my_trigger$
+        DECLARE
+                pid property;
+        BEGIN
+                for pid IN SELECT * FROM property LOOP
+                        IF(pid.property_id = new.property_id) THEN
+                                IF(pid.bookingstatus = 'Available') THEN
+                                        INSERT INTO bookingdetails values (new.booking_id,new.property_id,new.buyer_id,new.seller_id,new.date_of_booking,new.selling_price);
+                                else
+                                        RAISE NOTICE 'Property is already sold';                                
+                                END IF;
+                        END IF;
+                END LOOP;
+        RETURN NEW;
+        END;
+$my_trigger$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER my_trigger INSTEAD OF INSERT ON booking
+FOR EACH ROW EXECUTE PROCEDURE my_trigger_function();
+
+
+
+
+3.        set search_path to realestate1;
+CREATE OR REPLACE FUNCTION insert_in_property() RETURNS TRIGGER AS $my_trigger1$
+        DECLARE
+            cid customerdetails;
+        BEGIN
+            for cid IN SELECT * FROM customerdetails LOOP
+                IF(cid.verification_Id = new.owner_Id) THEN
+                    IF(cid.type_of_customer = 'Seller' or cid.type_of_customer = 'Both') THEN
+                        INSERT INTO property values  (new.property_id,new.propertyname,new.Location,new.owner_id,new.constructionstatus,new.bookingstatus,new.area);
+                    else
+                        RAISE NOTICE 'Owner must be of type: seller or both';                   
+                    END IF;
+                END IF;
+            END LOOP;
+        RETURN NEW;
+        END;
+$my_trigger1$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER my_trigger1 INSTEAD OF INSERT ON property_view
+FOR EACH ROW EXECUTE PROCEDURE insert_in_property();

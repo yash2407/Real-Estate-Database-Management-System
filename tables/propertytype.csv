@@ -1,0 +1,8 @@
+"property_id","Type","sales_type","amount","contract_period","bhk","carpet_area","Floor","subtype"
+"2201","Plot","for sale",1000000,"","",1500,"",""
+"2202","Farmhouse","for sale",50000000,"",8,5000,"","Residential"
+"2204","Flat","for lease",2500000,"11 months",3,2200,3,"Residential"
+"2205","Flat","for rent",6000000,"24 months",4,2500,4,"Commercial"
+"2207","Bunglow","for lease",8000000,"10 months",6,4400,2,"Residential"
+"2209","Flat","for sale",2000000,"",2,1800,5,"Residential"
+"2210","Plot","for sale",3000000,"","",6000,"",""

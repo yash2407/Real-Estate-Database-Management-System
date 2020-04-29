@@ -1,0 +1,561 @@
+﻿#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sqlda.h>
+#include <pgtypes_date.h>    
+#include <pgtypes_numeric.h>
+    
+sqlda_t *sqlda1;
+sqlda_t *sqlda2;
+EXEC SQL BEGIN DECLARE SECTION;
+char query[20000],x[20000];
+char c,*ans;
+const char *password, *username, *name, *search;
+int i=0,intval,cnt=0;
+long long int longlongval;
+float realval;
+date dateval;
+numeric numericval;
+short shortval;
+EXEC SQL END DECLARE SECTION;
+EXEC SQL WHENEVER SQLERROR CALL print_sqlca();
+
+
+void print_sqlca()
+{
+        fprintf(stderr, "==== sqlca ====\n");
+        fprintf(stderr, "sqlcode: %ld\n", sqlca.sqlcode);
+        fprintf(stderr, "sqlerrm.sqlerrml: %d\n", sqlca.sqlerrm.sqlerrml);
+        fprintf(stderr, "sqlerrm.sqlerrmc: %s\n", sqlca.sqlerrm.sqlerrmc);
+        fprintf(stderr, "sqlerrd: %ld %ld %ld %ld %ld %ld\n", sqlca.sqlerrd[0],sqlca.sqlerrd[1],sqlca.sqlerrd[2],
+                                                              sqlca.sqlerrd[3],sqlca.sqlerrd[4],sqlca.sqlerrd[5]);
+        fprintf(stderr, "sqlwarn: %d %d %d %d %d %d %d %d\n", sqlca.sqlwarn[0], sqlca.sqlwarn[1], sqlca.sqlwarn[2],
+                                                              sqlca.sqlwarn[3], sqlca.sqlwarn[4], sqlca.sqlwarn[5],
+                                                              sqlca.sqlwarn[6], sqlca.sqlwarn[7]);
+        fprintf(stderr, "sqlstate: %5s\n", sqlca.sqlstate);
+        fprintf(stderr, "===============\n");
+}
+
+
+
+
+void executequery(){
+    printf("\nQuery : ");
+    scanf(" %[^\n]",query);
+    int firstTime = 1;
+    EXEC SQL PREPARE eq FROM :query;
+    EXEC SQL EXECUTE eq;
+    if(sqlca.sqlcode==0)
+    {
+            fprintf(stderr, "sucessful\n");
+    }
+    EXEC SQL COMMIT;
+
+
+}
+
+
+void executequery1(){
+    printf("\nQuery : ");
+    scanf(" %[^\n]",query);
+    int firstTime = 1;
+    printf("\nPrice per\tCity\t\tArea\t\tSales Type\n");
+    printf("square feet\n");
+    EXEC SQL PREPARE eq FROM :query;
+    EXEC SQL DECLARE cur1 CURSOR FOR eq;
+    EXEC SQL OPEN cur1;
+    while(sqlca.sqlcode==0){
+
+
+            EXEC SQL FETCH NEXT FROM cur1 INTO DESCRIPTOR sqlda1;
+            sqlda_t *cur_sqlda;
+
+
+            for (cur_sqlda = sqlda1;cur_sqlda != NULL;cur_sqlda = cur_sqlda->desc_next){
+
+
+                    int i;
+                char name_buf[1024];
+                char var_buf[1024];
+
+
+                if(sqlca.sqlcode != 0)
+                        break;
+
+
+                    point: for (i = 0; i < cur_sqlda->sqld; i++){
+
+
+                            sqlvar_t v = cur_sqlda->sqlvar[i];
+                            char *sqldata = v.sqldata;
+                            short sqllen  = v.sqllen;
+                            strncpy(name_buf, v.sqlname.data, v.sqlname.length);
+                    name_buf[v.sqlname.length] = '\0';
+
+
+                    switch (v.sqltype){
+
+
+                        case ECPGt_char:
+                            memset(&var_buf, 0, sizeof(var_buf));
+                            memcpy(&var_buf, sqldata, (sizeof(var_buf)<=sqllen ? sizeof(var_buf)-1 : sqllen) );
+                            break;
+
+
+                        case ECPGt_int: /* integer */
+                            memcpy(&intval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%d", intval);
+                            break;
+
+
+                        case ECPGt_long_long: /* bigint */
+                            memcpy(&longlongval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%lld", longlongval);
+                            break;
+
+
+                        case ECPGt_float: /* real */
+                            memcpy(&realval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%.2f", realval);
+                            break;
+
+
+                        case ECPGt_short: /* sort */
+                            memcpy(&shortval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%d", shortval);
+                            break;
+
+
+                 
+
+
+                        case 7: /* bigint */
+                            memcpy(&longlongval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%lld", longlongval);
+                            break;
+
+
+                        default:
+                                {
+                                    int i;
+                                    memset(var_buf, 0, sizeof(var_buf));
+                                    for (i = 0; i < sqllen; i++){
+                                            char tmpbuf[16];
+                                            snprintf(tmpbuf, sizeof(tmpbuf), "%02x ", (unsigned char) sqldata[i]);
+                                            strncat(var_buf, tmpbuf, sizeof(var_buf));
+                                           }
+                                }
+                            break;
+
+
+                        }
+                    printf("%s \t",var_buf);
+                        
+                }
+                    printf("\n");
+            }
+    }
+    EXEC SQL CLOSE cur1;
+    EXEC SQL COMMIT;
+}
+void executequery2(){
+    printf("\nQuery : ");
+    scanf(" %[^\n]",query);
+    int firstTime = 1;
+    printf("\nSellerId\tNo.ofBuyer\tCustomers \tPercentage\n");
+    EXEC SQL PREPARE eq FROM :query;
+    EXEC SQL DECLARE cur2 CURSOR FOR eq;
+    EXEC SQL OPEN cur2;
+    while(sqlca.sqlcode==0){
+
+
+            EXEC SQL FETCH NEXT FROM cur2 INTO DESCRIPTOR sqlda1;
+            sqlda_t *cur_sqlda;
+
+
+            for (cur_sqlda = sqlda1;cur_sqlda != NULL;cur_sqlda = cur_sqlda->desc_next){
+
+
+                    int i;
+                char name_buf[1024];
+                char var_buf[1024];
+
+
+                if(sqlca.sqlcode != 0)
+                        break;
+
+
+                    point: for (i = 0; i < cur_sqlda->sqld; i++){
+
+
+                            sqlvar_t v = cur_sqlda->sqlvar[i];
+                            char *sqldata = v.sqldata;
+                            short sqllen  = v.sqllen;
+                            strncpy(name_buf, v.sqlname.data, v.sqlname.length);
+                    name_buf[v.sqlname.length] = '\0';
+
+
+                    switch (v.sqltype){
+
+
+                        case ECPGt_char:
+                            memset(&var_buf, 0, sizeof(var_buf));
+                            memcpy(&var_buf, sqldata, (sizeof(var_buf)<=sqllen ? sizeof(var_buf)-1 : sqllen) );
+                            break;
+
+
+                        case ECPGt_int: /* integer */
+                            memcpy(&intval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%d", intval);
+                            break;
+
+
+                        case ECPGt_long_long: /* bigint */
+                            memcpy(&longlongval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%lld", longlongval);
+                            break;
+
+
+                        case ECPGt_float: /* real */
+                            memcpy(&realval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%.2f", realval);
+                            break;
+
+
+                        case ECPGt_short: /* sort */
+                            memcpy(&shortval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%d", shortval);
+                            break;
+
+
+                 
+
+
+                        case 7: /* bigint */
+                            memcpy(&longlongval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%lld", longlongval);
+                            break;
+
+
+                        default:
+                                {
+                                    int i;
+                                    memset(var_buf, 0, sizeof(var_buf));
+                                    for (i = 0; i < sqllen; i++){
+                                            char tmpbuf[16];
+                                            snprintf(tmpbuf, sizeof(tmpbuf), "%02x ", (unsigned char) sqldata[i]);
+                                            strncat(var_buf, tmpbuf, sizeof(var_buf));
+                                           }
+                                }
+                            break;
+
+
+                        }
+                    printf("%s \t\t",var_buf);
+                        
+                }
+
+
+
+
+                    printf("\n");
+
+
+            }
+
+
+    }
+
+
+    EXEC SQL CLOSE cur2;
+    EXEC SQL COMMIT;
+
+
+}
+
+
+
+
+void executequery3(){
+    printf("\nQuery : ");
+    scanf(" %[^\n]",query);
+    int firstTime = 1;
+    printf("\nSellerId\tMin Age \tMax Age\n");
+    EXEC SQL PREPARE eq FROM :query;
+    EXEC SQL DECLARE cur3 CURSOR FOR eq;
+    EXEC SQL OPEN cur3;
+    while(sqlca.sqlcode==0){
+
+
+            EXEC SQL FETCH NEXT FROM cur3 INTO DESCRIPTOR sqlda1;
+            sqlda_t *cur_sqlda;
+
+
+            for (cur_sqlda = sqlda1;cur_sqlda != NULL;cur_sqlda = cur_sqlda->desc_next){
+
+
+                    int i;
+                char name_buf[1024];
+                char var_buf[1024];
+
+
+                if(sqlca.sqlcode != 0)
+                        break;
+
+
+                    point: for (i = 0; i < cur_sqlda->sqld; i++){
+
+
+                            sqlvar_t v = cur_sqlda->sqlvar[i];
+                            char *sqldata = v.sqldata;
+                            short sqllen  = v.sqllen;
+                            strncpy(name_buf, v.sqlname.data, v.sqlname.length);
+                    name_buf[v.sqlname.length] = '\0';
+
+
+                    switch (v.sqltype){
+
+
+                        case ECPGt_char:
+                            memset(&var_buf, 0, sizeof(var_buf));
+                            memcpy(&var_buf, sqldata, (sizeof(var_buf)<=sqllen ? sizeof(var_buf)-1 : sqllen) );
+                            break;
+
+
+                        case ECPGt_int: /* integer */
+                            memcpy(&intval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%d", intval);
+                            break;
+
+
+                        case ECPGt_long_long: /* bigint */
+                            memcpy(&longlongval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%lld", longlongval);
+                            break;
+
+
+                        case ECPGt_float: /* real */
+                            memcpy(&realval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%.2f", realval);
+                            break;
+
+
+                        case ECPGt_short: /* sort */
+                            memcpy(&shortval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%d", shortval);
+                            break;
+
+
+                 
+
+
+                        case 7: /* bigint */
+                            memcpy(&longlongval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%lld", longlongval);
+                            break;
+
+
+                        default:
+                                {
+                                    int i;
+                                    memset(var_buf, 0, sizeof(var_buf));
+                                    for (i = 0; i < sqllen; i++){
+                                            char tmpbuf[16];
+                                            snprintf(tmpbuf, sizeof(tmpbuf), "%02x ", (unsigned char) sqldata[i]);
+                                            strncat(var_buf, tmpbuf, sizeof(var_buf));
+                                           }
+                                }
+                            break;
+
+
+                        }
+                    printf("%s\t \t",var_buf);
+                        
+                }
+                    printf("\n");
+
+
+            }
+
+
+    }
+    EXEC SQL CLOSE cur3;
+    EXEC SQL COMMIT;
+}
+
+
+void executequery4(){
+    printf("\nQuery : ");
+    scanf(" %[^\n]",query);
+    int firstTime = 1;
+
+
+    printf("\nDifference\tDifference\n");
+    printf("from min value\tfrom max value\n");
+    EXEC SQL PREPARE eq FROM :query;
+    EXEC SQL DECLARE cur4 CURSOR FOR eq;
+    EXEC SQL OPEN cur4;
+    while(sqlca.sqlcode==0){
+
+
+            EXEC SQL FETCH NEXT FROM cur4 INTO DESCRIPTOR sqlda1;
+            sqlda_t *cur_sqlda;
+
+
+            for (cur_sqlda = sqlda1;cur_sqlda != NULL;cur_sqlda = cur_sqlda->desc_next){
+
+
+                    int i;
+                char name_buf[1024];
+                char var_buf[1024];
+
+
+                if(sqlca.sqlcode != 0)
+                        break;
+
+
+                    point: for (i = 0; i < cur_sqlda->sqld; i++){
+
+
+                            sqlvar_t v = cur_sqlda->sqlvar[i];
+                            char *sqldata = v.sqldata;
+                            short sqllen  = v.sqllen;
+                            strncpy(name_buf, v.sqlname.data, v.sqlname.length);
+                    name_buf[v.sqlname.length] = '\0';
+
+
+                    switch (v.sqltype){
+
+
+                        case ECPGt_char:
+                            memset(&var_buf, 0, sizeof(var_buf));
+                            memcpy(&var_buf, sqldata, (sizeof(var_buf)<=sqllen ? sizeof(var_buf)-1 : sqllen) );
+                            break;
+
+
+                        case ECPGt_int: /* integer */
+                            memcpy(&intval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%d", intval);
+                            break;
+
+
+                        case ECPGt_long_long: /* bigint */
+                            memcpy(&longlongval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%lld", longlongval);
+                            break;
+
+
+                        case ECPGt_float: /* real */
+                            memcpy(&realval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%.2f", realval);
+                            break;
+
+
+                        case ECPGt_short: /* sort */
+                            memcpy(&shortval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%d", shortval);
+                            break;
+
+
+                 
+
+
+                        case 7: /* bigint */
+                            memcpy(&longlongval, sqldata, sqllen);
+                            snprintf(var_buf, sizeof(var_buf), "%lld", longlongval);
+                            break;
+
+
+                        default:
+                                {
+                                    int i;
+                                    memset(var_buf, 0, sizeof(var_buf));
+                                    for (i = 0; i < sqllen; i++){
+                                            char tmpbuf[16];
+                                            snprintf(tmpbuf, sizeof(tmpbuf), "%02x ", (unsigned char) sqldata[i]);
+                                            strncat(var_buf, tmpbuf, sizeof(var_buf));
+                                           }
+                                }
+                            break;
+
+
+                        }
+                    printf("%s\t",var_buf);
+                        
+                }
+
+
+
+
+                    printf("\n");
+
+
+            }
+
+
+    }
+
+
+    EXEC SQL CLOSE cur4;
+    EXEC SQL COMMIT;
+
+
+}
+
+
+int main()
+{
+    username = "201601218";
+    name = "201601218@10.100.71.21";
+    password = "yash";
+    search = "realestate1";
+
+
+    EXEC SQL CONNECT TO :name USER :username USING :password;
+    if(sqlca.sqlcode==0)
+            fprintf(stderr, "Connection Successful\n");
+    else
+    {
+            fprintf(stderr,"Connection couldn't be established\n");
+            exit(1);
+    }
+
+
+    EXEC SQL set search_path to :search;
+    if(sqlca.sqlcode==0)
+            fprintf(stderr,"Search_path Successfully set\n");
+    else
+    {
+            fprintf(stderr,"No such path available\n");
+            exit(1);
+    }
+
+
+    while(1)
+    {
+            printf("1. Price per sq ft. in your area\n2. Find the number of buyers whose budget is greater than the average value of seller's properties \n3. Find your target age group  \n4. Find the price range in your city according to your budget\n5. Query\n6. Exit\n");            
+    scanf("%d",&cnt);
+
+
+                    if(cnt==1){
+                    executequery1();
+            }
+            else if(cnt==2){
+                    executequery2();
+            }
+                    else if(cnt==3){
+                    executequery3();    
+            }
+            else if(cnt==4){
+                    executequery4();    
+            }    
+            else if(cnt==5)
+            {
+                    executequery();
+            }
+            else{
+                            break;
+            }
+    }
+}
